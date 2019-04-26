@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using MySql.Data.MySqlClient;
+using static System.Windows.Forms.ListView;
+using System.Runtime.InteropServices;
 
 namespace ToDo
 {
@@ -19,6 +21,7 @@ namespace ToDo
             InitializeComponent();
             SetDatabase();
             UpdateListView();
+            RegisterHotKey(this.Handle, this.GetType().GetHashCode(), 0x0002, (int)Keys.Space);
         }
 
         ConfigurationManager manager = new ConfigurationManager();
@@ -39,18 +42,21 @@ namespace ToDo
         public void UpdateListView()
         {
             List<ToDo> toDos = manager.GetFromDatabase();
+            SetItems(toDos);
+        }
+
+        void SetItems(List<ToDo> todos)
+        {
             int id = 0;
-            foreach(ToDo todo in toDos)
+            foreach (ToDo todo in todos)
             {
                 id++;
                 ListViewItem.ListViewSubItem subitem = new ListViewItem.ListViewSubItem();
                 subitem.Name = "WhatToDo";
                 subitem.Text = todo.WhatToDo;
                 subitem.Tag = todo.WhatToDo;
-                ListViewItem item = new ListViewItem()
-                {
+                ListViewItem item = new ListViewItem();
 
-                };
                 item.SubItems.Clear();
                 item.SubItems[0] = subitem;
                 subitem = new ListViewItem.ListViewSubItem();
@@ -87,16 +93,44 @@ namespace ToDo
                 item.SubItems[0] = subitem;
                 lstVw_References.Items.Add(item);
             }
-            for(int i = 0; lstVw_References.Items.Count > i; i++)
+            for (int i = 0; lstVw_References.Items.Count > i; i++)
             {
                 lstVw_References.Items[i].SubItems[1].Text = lstVw_References.Items[i].SubItems[1].Text.Substring(0, lstVw_References.Items[i].SubItems[1].Text.Length - 1);
             }
+            lstVw_Main.Items[0].Selected = true;
         }
 
         private void UploadToolStripMenuItem_Click(object sender, EventArgs e)
         {
             AddToDo add = new AddToDo();
             add.ShowDialog();
+        }
+
+        private void References_Clicked(object sender, EventArgs e)
+        {
+            SelectedListViewItemCollection items = lstVw_References.SelectedItems;
+            if (items.Count > 1)
+                return;
+            if(Uri.TryCreate(items[0].SubItems["reference"].Text,UriKind.RelativeOrAbsolute,out Uri result))
+            {
+                DialogResult open = MessageBox.Show("It looks like you selected an URL, would you like to open it?", "Open URL", MessageBoxButtons.YesNoCancel);
+                if(open == DialogResult.Yes)
+                {
+                    System.Diagnostics.Process.Start(result.ToString());
+                }
+            }
+        }
+
+        [DllImport("user32.dll")]
+        public static extern bool RegisterHotKey(IntPtr hWnd, int id, int fsModifiers, int vlc);
+
+        protected override void WndProc(ref Message m)
+        {
+            if (m.Msg == 0x0312)
+            {
+                
+            }
+            base.WndProc(ref m);
         }
     }
 }

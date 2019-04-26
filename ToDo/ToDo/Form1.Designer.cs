@@ -29,18 +29,18 @@
         private void InitializeComponent()
         {
             this.lstVw_Main = new System.Windows.Forms.ListView();
-            this.chkBx_Today = new System.Windows.Forms.CheckBox();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.lstVw_References = new System.Windows.Forms.ListView();
             this.clmn_What = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.clmn_When = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.clmn_Type = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.label1 = new System.Windows.Forms.Label();
+            this.refID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.chkBx_Today = new System.Windows.Forms.CheckBox();
+            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.lstVw_References = new System.Windows.Forms.ListView();
             this.clmn_RefID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.clmn_Content = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.label1 = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.uploadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.refID = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -51,12 +51,32 @@
             this.clmn_When,
             this.clmn_Type,
             this.refID});
+            this.lstVw_Main.FullRowSelect = true;
             this.lstVw_Main.Location = new System.Drawing.Point(83, 56);
             this.lstVw_Main.Name = "lstVw_Main";
             this.lstVw_Main.Size = new System.Drawing.Size(1228, 264);
             this.lstVw_Main.TabIndex = 0;
             this.lstVw_Main.UseCompatibleStateImageBehavior = false;
             this.lstVw_Main.View = System.Windows.Forms.View.Details;
+            // 
+            // clmn_What
+            // 
+            this.clmn_What.Text = "What to do";
+            this.clmn_What.Width = 314;
+            // 
+            // clmn_When
+            // 
+            this.clmn_When.Text = "When to do";
+            this.clmn_When.Width = 175;
+            // 
+            // clmn_Type
+            // 
+            this.clmn_Type.Text = "Type";
+            this.clmn_Type.Width = 234;
+            // 
+            // refID
+            // 
+            this.refID.Text = "Ref ID";
             // 
             // chkBx_Today
             // 
@@ -80,36 +100,14 @@
             this.lstVw_References.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.clmn_RefID,
             this.clmn_Content});
+            this.lstVw_References.FullRowSelect = true;
             this.lstVw_References.Location = new System.Drawing.Point(83, 372);
             this.lstVw_References.Name = "lstVw_References";
             this.lstVw_References.Size = new System.Drawing.Size(729, 97);
             this.lstVw_References.TabIndex = 3;
             this.lstVw_References.UseCompatibleStateImageBehavior = false;
             this.lstVw_References.View = System.Windows.Forms.View.Details;
-            // 
-            // clmn_What
-            // 
-            this.clmn_What.Text = "What to do";
-            this.clmn_What.Width = 314;
-            // 
-            // clmn_When
-            // 
-            this.clmn_When.Text = "When to do";
-            this.clmn_When.Width = 175;
-            // 
-            // clmn_Type
-            // 
-            this.clmn_Type.Text = "Type";
-            this.clmn_Type.Width = 234;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(80, 352);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(85, 17);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "References:";
+            this.lstVw_References.Click += new System.EventHandler(this.References_Clicked);
             // 
             // clmn_RefID
             // 
@@ -119,6 +117,15 @@
             // 
             this.clmn_Content.Text = "Content";
             this.clmn_Content.Width = 659;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(80, 352);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(85, 17);
+            this.label1.TabIndex = 4;
+            this.label1.Text = "References:";
             // 
             // menuStrip1
             // 
@@ -137,10 +144,6 @@
             this.uploadToolStripMenuItem.Size = new System.Drawing.Size(70, 24);
             this.uploadToolStripMenuItem.Text = "Upload";
             this.uploadToolStripMenuItem.Click += new System.EventHandler(this.UploadToolStripMenuItem_Click);
-            // 
-            // refID
-            // 
-            this.refID.Text = "Ref ID";
             // 
             // Form1
             // 

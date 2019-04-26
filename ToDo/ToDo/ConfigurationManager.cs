@@ -56,7 +56,8 @@ namespace ToDo
                 {
                     type = reader["type"].ToString(),
                     WhatToDo = reader["WhatToDo"].ToString(),
-                    When = Convert.ToDateTime(reader["WhenToDo"].ToString())
+                    When = Convert.ToDateTime(reader["WhenToDo"].ToString()),
+                    IDFromDB = Convert.ToInt32(reader["ID"])
                 };
 
                 string AllReferences = reader["references"].ToString();

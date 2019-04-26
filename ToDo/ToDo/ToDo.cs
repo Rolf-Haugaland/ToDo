@@ -8,6 +8,7 @@ namespace ToDo
 {
     public class ToDo
     {
+        public int IDFromDB;
         public string WhatToDo;
         public List<string> References;
         public DateTime When;
